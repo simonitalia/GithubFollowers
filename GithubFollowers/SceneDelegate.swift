@@ -12,12 +12,53 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        //create tabBarVC
+        let tabBarController = createTabBarController()
+        
+        //setup window
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = tabBarController //set tabBarVC as root window vc
+        window?.makeKeyAndVisible() //shows the vc
+    }
+    
+    //setup SearchVC
+    func createSearchNavigationController () -> UINavigationController {
+        
+        //create vc object
+        let vc = SearchViewController()
+        vc.title = "Search"
+        vc.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        
+        //embed vc object inside nc object and return it
+        return UINavigationController(rootViewController: vc)
+    }
+    
+    //setup FavoritesVC
+    func createFavoritesNavigationController () -> UINavigationController {
+        
+        //create vc object
+        let vc = FavoritesViewController()
+        vc.title = "Favorites"
+        vc.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        
+        //embed vc object inside nc object and return it
+        return UINavigationController(rootViewController: vc)
+    }
+    
+    func createTabBarController() -> UITabBarController {
+        
+        //create and configure TabBar
+        let tabBarController = UITabBarController()
+        UITabBar.appearance().tintColor = .systemGreen
+        let searchVC = createSearchNavigationController()
+        let favoritesVC = createFavoritesNavigationController()
+        tabBarController.viewControllers = [searchVC, favoritesVC]
+        return tabBarController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
