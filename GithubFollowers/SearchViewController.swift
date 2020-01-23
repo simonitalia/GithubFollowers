@@ -14,6 +14,13 @@ class SearchViewController: UIViewController {
     let logoImageView = UIImageView()
     let usernameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    
+    var isUsernameTextFieldEmpty: Bool {
+        get {
+            return usernameTextField.text!.isEmpty //returns true if field is empty, otherwise returns false
+        }
+            //note! get block and return keyword not actually required, just including for future reference
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +28,34 @@ class SearchViewController: UIViewController {
         configureLogoImageView()
         configureTextField()
         configureCallToActionButton()
+        createDismissKeyboardTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
             //ensure to hide the navBar when navigating back from anonther VC that shows the navBar
+    }
+    
+    func createDismissKeyboardTapGesture() {
+        
+        //add a tap gesture recognizer to the entire view to trigger kb dismissal
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing)) //.endEditing = resign first responder
+        view.addGestureRecognizer(tap)
+    }
+    
+    //handle passping data to an dtriggering target VC on events
+    @objc func pushToFollowersViewController() {
+        
+        //check usernameTextField is not empty
+        guard !isUsernameTextFieldEmpty else {
+            print("usernameTextFieldEmpty is empty")
+            return }
+        
+        let vc = FollowersViewController()
+        vc.username = usernameTextField.text
+        vc.title = usernameTextField.text
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func configureLogoImageView() {
@@ -48,6 +77,7 @@ class SearchViewController: UIViewController {
     
     func configureTextField() {
         view.addSubview(usernameTextField)
+        usernameTextField.delegate = self //set to self to listen for textField updates
         
         //add layout constraints
         NSLayoutConstraint.activate([
@@ -69,7 +99,17 @@ class SearchViewController: UIViewController {
             callToActionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        
+        //submit data to and trigger display of target VC
+        callToActionButton.addTarget(self, action: #selector(pushToFollowersViewController), for: .touchUpInside)
     }
+}
 
+extension SearchViewController: UITextFieldDelegate {
+    
+    //submit data to and trigger display of target VC
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushToFollowersViewController()
+        return true
+    }
+    
 }

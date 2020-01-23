@@ -24,6 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = tabBarController //set tabBarVC as root window vc
         window?.makeKeyAndVisible() //shows the vc
+        
+        configureNavigationBar()
     }
     
     //setup SearchVC
@@ -59,6 +61,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let favoritesVC = createFavoritesNavigationController()
         tabBarController.viewControllers = [searchVC, favoritesVC]
         return tabBarController
+    }
+    
+    func configureNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemGreen
+            //ensures navBar tint color is system green app wide
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -15,7 +15,7 @@ class GFButton: UIButton {
         super.init(frame: frame)
         
         //add GFButton customization ontop of underlying UIButton
-        configure()
+//        configure()
     }
     
     //MARK: UIButtom Required init

@@ -35,9 +35,8 @@ class GFTextField: UITextField {
         font = UIFont.preferredFont(forTextStyle: .title2)
         adjustsFontSizeToFitWidth = true //shrink to fit text
         minimumFontSize = 12 //don't shrink text beyond 12
-        
-        placeholder = "Enter username"
-        
+        returnKeyType = .go //sets text of return key shown in kb
+        placeholder = "Enter username" 
     }
     
     

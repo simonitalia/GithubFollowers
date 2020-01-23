@@ -15,6 +15,7 @@
 		2A48B3CD23D8555400B00BD8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */; };
 		2A48B3CF23D86A8700B00BD8 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3CE23D86A8700B00BD8 /* GFButton.swift */; };
 		2A48B3D123D8766100B00BD8 /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3D023D8766100B00BD8 /* GFTextField.swift */; };
+		2A48B3D323D9776800B00BD8 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3D223D9776700B00BD8 /* FollowersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2A48B3CE23D86A8700B00BD8 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		2A48B3D023D8766100B00BD8 /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
+		2A48B3D223D9776700B00BD8 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				2A48B3BA23D8469600B00BD8 /* SceneDelegate.swift */,
 				2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */,
 				2A48B3BC23D8469600B00BD8 /* FavoritesViewController.swift */,
+				2A48B3D223D9776700B00BD8 /* FollowersViewController.swift */,
 				2A48B3D023D8766100B00BD8 /* GFTextField.swift */,
 				2A48B3CE23D86A8700B00BD8 /* GFButton.swift */,
 				2A48B3C123D8469800B00BD8 /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 			files = (
 				2A48B3D123D8766100B00BD8 /* GFTextField.swift in Sources */,
 				2A48B3BD23D8469600B00BD8 /* FavoritesViewController.swift in Sources */,
+				2A48B3D323D9776800B00BD8 /* FollowersViewController.swift in Sources */,
 				2A48B3CF23D86A8700B00BD8 /* GFButton.swift in Sources */,
 				2A48B3B923D8469600B00BD8 /* AppDelegate.swift in Sources */,
 				2A48B3CD23D8555400B00BD8 /* SearchViewController.swift in Sources */,
