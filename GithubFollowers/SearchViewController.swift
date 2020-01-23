@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    //Setp screen/sceen elements
+    //create scene objects / elements
     let logoImageView = UIImageView()
     let usernameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
@@ -49,7 +49,7 @@ class SearchViewController: UIViewController {
         
         //check usernameTextField is not empty
         guard !isUsernameTextFieldEmpty else {
-            print("usernameTextFieldEmpty is empty")
+            presentGFAlertViewController(title: "Username Empty!", message: "Please enter a GitHub username.", buttonTitle: "OK")
             return }
         
         let vc = FollowersViewController()
@@ -80,10 +80,11 @@ class SearchViewController: UIViewController {
         usernameTextField.delegate = self //set to self to listen for textField updates
         
         //add layout constraints
+        let padding: CGFloat = 50
         NSLayoutConstraint.activate([
             usernameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
-            usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             usernameTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
@@ -92,10 +93,11 @@ class SearchViewController: UIViewController {
         view.addSubview(callToActionButton)
         
         //add layout constraints
+        let padding: CGFloat = 50
         NSLayoutConstraint.activate([
-            callToActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            callToActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            callToActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            callToActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+            callToActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            callToActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             callToActionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         

@@ -10,17 +10,18 @@ import UIKit
 
 class GFTextField: UITextField {
     
+    //MARK: UITextField object initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    //required init used for storyboard initialization
+    //this is required for storyboard based apps
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Custom GFTextField configuration
+    //MARK: GFTextField customizations
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -38,9 +39,5 @@ class GFTextField: UITextField {
         returnKeyType = .go //sets text of return key shown in kb
         placeholder = "Enter username" 
     }
-    
-    
-    
-    
 
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class GFButton: UIButton {
     
-    //setup base UIButton object with its initializers
+    // MARK: UIButton object initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -18,11 +18,12 @@ class GFButton: UIButton {
 //        configure()
     }
     
-    //MARK: UIButtom Required init
-    //used for initialization in storyboard implementations, not required in this (non-stpryboard) app, but init must be present in UIButton sublass
+    
+     //this is required for storyboard based apps
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     //MARK: GFButton customizations
     init(backgroundColor: UIColor, title: String) {
@@ -33,9 +34,11 @@ class GFButton: UIButton {
     }
     
     private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
         layer.cornerRadius = 10
         titleLabel?.textColor = .white
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline) //bold
-        translatesAutoresizingMaskIntoConstraints = false
+        
     }
 }
