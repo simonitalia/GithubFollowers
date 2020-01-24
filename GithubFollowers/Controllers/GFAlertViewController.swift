@@ -11,7 +11,7 @@ import UIKit
 class GFAlertViewController: UIViewController {
     
     //UI elements / objects and properties
-    let alertContainerView = UIView()
+    let alertContainerView = GFAlertContainerView()
     
     let alertTitleLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
     var alertTitleText: String!
@@ -48,11 +48,6 @@ class GFAlertViewController: UIViewController {
     
     func configureAlertContainerView() {
         view.addSubview(alertContainerView)
-        alertContainerView.backgroundColor = .systemBackground
-        alertContainerView.layer.cornerRadius = 16
-        alertContainerView.layer.borderWidth = 2
-        alertContainerView.layer.borderColor = UIColor.white.cgColor
-        alertContainerView.translatesAutoresizingMaskIntoConstraints = false
         
         //add layout constraints
         NSLayoutConstraint.activate([

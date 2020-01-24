@@ -20,6 +20,7 @@
 		2A48B3D723D9A84700B00BD8 /* GFBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3D623D9A84700B00BD8 /* GFBodyLabel.swift */; };
 		2A48B3D923D9A99E00B00BD8 /* GFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3D823D9A99E00B00BD8 /* GFAlertViewController.swift */; };
 		2A48B3DB23D9C23D00B00BD8 /* UViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3DA23D9C23D00B00BD8 /* UViewController+Extension.swift */; };
+		2A48B3E723DACF1700B00BD8 /* GFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A48B3E623DACF1700B00BD8 /* GFAlertContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		2A48B3D623D9A84700B00BD8 /* GFBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFBodyLabel.swift; sourceTree = "<group>"; };
 		2A48B3D823D9A99E00B00BD8 /* GFAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertViewController.swift; sourceTree = "<group>"; };
 		2A48B3DA23D9C23D00B00BD8 /* UViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UViewController+Extension.swift"; sourceTree = "<group>"; };
+		2A48B3E623DACF1700B00BD8 /* GFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				2A48B3CE23D86A8700B00BD8 /* GFButton.swift */,
 				2A48B3D423D9A3BA00B00BD8 /* GFTitleLabel.swift */,
 				2A48B3D623D9A84700B00BD8 /* GFBodyLabel.swift */,
+				2A48B3E623DACF1700B00BD8 /* GFAlertContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A48B3E723DACF1700B00BD8 /* GFAlertContainerView.swift in Sources */,
 				2A48B3D123D8766100B00BD8 /* GFTextField.swift in Sources */,
 				2A48B3BD23D8469600B00BD8 /* FavoritesViewController.swift in Sources */,
 				2A48B3D323D9776800B00BD8 /* FollowersViewController.swift in Sources */,
