@@ -70,22 +70,54 @@
 		2A48B3B723D8469600B00BD8 /* GithubFollowers */ = {
 			isa = PBXGroup;
 			children = (
-				2A48B3B823D8469600B00BD8 /* AppDelegate.swift */,
-				2A48B3BA23D8469600B00BD8 /* SceneDelegate.swift */,
-				2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */,
-				2A48B3BC23D8469600B00BD8 /* FavoritesViewController.swift */,
-				2A48B3D223D9776700B00BD8 /* FollowersViewController.swift */,
-				2A48B3D823D9A99E00B00BD8 /* GFAlertViewController.swift */,
-				2A48B3D023D8766100B00BD8 /* GFTextField.swift */,
-				2A48B3CE23D86A8700B00BD8 /* GFButton.swift */,
-				2A48B3D423D9A3BA00B00BD8 /* GFTitleLabel.swift */,
-				2A48B3D623D9A84700B00BD8 /* GFBodyLabel.swift */,
-				2A48B3DA23D9C23D00B00BD8 /* UViewController+Extension.swift */,
+				2A48B3E223DACDBE00B00BD8 /* Support */,
+				2A48B3E523DACDF800B00BD8 /* Extensions */,
+				2A48B3E323DACDD000B00BD8 /* Controllers */,
+				2A48B3E423DACDE800B00BD8 /* Views */,
 				2A48B3C123D8469800B00BD8 /* Assets.xcassets */,
 				2A48B3C323D8469800B00BD8 /* LaunchScreen.storyboard */,
 				2A48B3C623D8469800B00BD8 /* Info.plist */,
 			);
 			path = GithubFollowers;
+			sourceTree = "<group>";
+		};
+		2A48B3E223DACDBE00B00BD8 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				2A48B3B823D8469600B00BD8 /* AppDelegate.swift */,
+				2A48B3BA23D8469600B00BD8 /* SceneDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		2A48B3E323DACDD000B00BD8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */,
+				2A48B3BC23D8469600B00BD8 /* FavoritesViewController.swift */,
+				2A48B3D223D9776700B00BD8 /* FollowersViewController.swift */,
+				2A48B3D823D9A99E00B00BD8 /* GFAlertViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2A48B3E423DACDE800B00BD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2A48B3D023D8766100B00BD8 /* GFTextField.swift */,
+				2A48B3CE23D86A8700B00BD8 /* GFButton.swift */,
+				2A48B3D423D9A3BA00B00BD8 /* GFTitleLabel.swift */,
+				2A48B3D623D9A84700B00BD8 /* GFBodyLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2A48B3E523DACDF800B00BD8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2A48B3DA23D9C23D00B00BD8 /* UViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
