@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+         navigationController?.setNavigationBarHidden(true, animated: true)
             //ensure to hide the navBar when navigating back from anonther VC that shows the navBar
     }
     
