@@ -16,14 +16,14 @@ class NetworkManager {
         
     }
     
-    func getFollowers(for username: String, page: Int, completion: @escaping ([Follower]?, String?) -> Void) {
+    func getFollowers(for username: String, page: Int, completion: @escaping ([Follower]?, ErrorMessage?) -> Void) {
         let usernameUrl = "users/\(username)/followers"
         let pageUrl = "?per_page=100&page=\(page)"
         let fullUrl = baseURL+usernameUrl+pageUrl
 //        print("\(fullUrl)/n")
         
         guard let url = URL(string: fullUrl) else {
-            completion(nil, "This username created an invalid request.\nPlease try again.")
+            completion(nil, .invalidUsername)
             return
         }
         
@@ -32,19 +32,19 @@ class NetworkManager {
             //handle error cases
             //random network error
             if let _ = error {
-                completion(nil, "Unable to complete request. Please check internet connection.")
+                completion(nil, .unableToComplete)
                 return
             }
             
             //bad http response
             guard let response = response as? HTTPURLResponse, response.statusCode == 200  else {
-                completion(nil, "Invalid response from server. Please try again.")
+                completion(nil, .invalidResposne)
                 return
             }
             
             //bad data returned
             guard let data = data else {
-                completion(nil, "Data from server was invalid. Please try again.")
+                completion(nil, .invalidData)
                 return
             }
             
@@ -55,7 +55,7 @@ class NetworkManager {
                 completion(followers, nil)
                 
             } catch {
-                completion(nil, "Data from server was invalid. Please try again.")
+                completion(nil, .invalidData)
             }
         }
         

@@ -21,7 +21,7 @@ class FollowersViewController: UIViewController {
         
         NetworkManager.shared.getFollowers(for: username, page: 1) { [unowned self] (followers, errorMessage) in
             guard let followers = followers else {
-                self.presentGFAlertViewController(title: "Error fetching Data!", message: errorMessage!, buttonTitle: "OK")
+                self.presentGFAlertViewController(title: "Error Fetching Data!", message: errorMessage!.rawValue, buttonTitle: "OK")
                 return
             }
             print("Followers.count: \(followers.count)\n")
