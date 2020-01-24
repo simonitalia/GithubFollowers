@@ -18,6 +18,15 @@ class FollowersViewController: UIViewController {
         //setup UI
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        NetworkManager.shared.getFollowers(for: username, page: 1) { [unowned self] (followers, errorMessage) in
+            guard let followers = followers else {
+                self.presentGFAlertViewController(title: "Error fetching Data!", message: errorMessage!, buttonTitle: "OK")
+                return
+            }
+            print("Followers.count: \(followers.count)\n")
+            print(followers)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
