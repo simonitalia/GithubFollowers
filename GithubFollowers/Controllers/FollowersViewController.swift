@@ -19,13 +19,16 @@ class FollowersViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        NetworkManager.shared.getFollowers(for: username, page: 1) { [unowned self] (followers, errorMessage) in
-            guard let followers = followers else {
-                self.presentGFAlertViewController(title: "Error Fetching Data!", message: errorMessage!.rawValue, buttonTitle: "OK")
-                return
+        NetworkManager.shared.getFollowers(for: username, page: 1) { [unowned self] (result) in
+            
+            switch result {
+            case .success(let followers):
+                print("Followers.count: \(followers.count)\n")
+                print(followers)
+                
+            case .failure(let error):
+                self.presentGFAlertViewController(title: "Error Fetching Data!", message: error.rawValue, buttonTitle: "OK")
             }
-            print("Followers.count: \(followers.count)\n")
-            print(followers)
         }
     }
     
@@ -34,11 +37,4 @@ class FollowersViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    
-    
-    
-    
-
-    
-
 }

@@ -16,14 +16,15 @@ class NetworkManager {
         
     }
     
-    func getFollowers(for username: String, page: Int, completion: @escaping ([Follower]?, ErrorMessage?) -> Void) {
+    //completion type using Swift 5's new result type
+    func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], GFError>) -> Void) {
         let usernameUrl = "users/\(username)/followers"
         let pageUrl = "?per_page=100&page=\(page)"
         let fullUrl = baseURL+usernameUrl+pageUrl
 //        print("\(fullUrl)/n")
         
         guard let url = URL(string: fullUrl) else {
-            completion(nil, .invalidUsername)
+            completion(.failure(.invalidUsername))
             return
         }
         
@@ -32,19 +33,19 @@ class NetworkManager {
             //handle error cases
             //random network error
             if let _ = error {
-                completion(nil, .unableToComplete)
+                completion(.failure(.unableToComplete))
                 return
             }
             
             //bad http response
             guard let response = response as? HTTPURLResponse, response.statusCode == 200  else {
-                completion(nil, .invalidResposne)
+                completion(.failure(.invalidResposne))
                 return
             }
             
             //bad data returned
             guard let data = data else {
-                completion(nil, .invalidData)
+                completion(.failure(.invalidData))
                 return
             }
             
@@ -52,10 +53,10 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let followers = try decoder.decode([Follower].self, from: data)
-                completion(followers, nil)
+                completion(.success(followers))
                 
             } catch {
-                completion(nil, .invalidData)
+                completion(.failure(.invalidData))
             }
         }
         
