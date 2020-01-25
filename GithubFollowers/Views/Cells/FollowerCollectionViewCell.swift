@@ -10,6 +10,7 @@ import UIKit
 
 class FollowerCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "FollowerCollectionViewCell"
+        //declared as static so it's accessible from the VC handling its presentation
     
     //UIElements contained within Cell
     let avatarImageView = GFAvatarImageView(frame: .zero)
