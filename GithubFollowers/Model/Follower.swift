@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Follower: Codable {
+struct Follower: Codable, Hashable { //both properties conforom to Hashable property, for use with  diffableDataSource
     
     var login: String
     var avatarUrl: String
-        //in json = avatar_url: converted automatically from by codable, from snake_case to camelCase
+        //will convert from snake_case to camelCase when invoking JSONDecoder()
 }

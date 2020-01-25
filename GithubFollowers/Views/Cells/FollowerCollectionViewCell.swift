@@ -30,8 +30,13 @@ class FollowerCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func set(follower: Follower) {
-        return usernameLabel.text = follower.login
+    //method called when configuring the cell data in the UICollectionView in FollowersVC
+    func setUsernameLabel(text: String) {
+        usernameLabel.text = text
+    }
+    
+    func set(avatarImageView image: UIImage) {
+        avatarImageView.image = image
     }
     
     

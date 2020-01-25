@@ -10,15 +10,24 @@ import UIKit
 
 class FollowersViewController: UIViewController {
     
+    enum Section { //enums by default conform to Hashable protocol
+        case main
+    }
+    
     //UI Elements contained within VC
     var username: String!
+    var followers = [Follower]()
+    
     var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+        //note, both objects (in this case Secton + Follower), must conform to Hashable
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         createCollectionView()
         fireGetFollowers()
+        configureCollectionViewCell()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +41,8 @@ class FollowersViewController: UIViewController {
             
             switch result {
             case .success(let followers):
+                self.followers = followers
+                self.updateCollectionViewDataWithSnapshot()
                 print("Followers.count: \(followers.count)\n")
 //                print(followers)
                 
@@ -50,7 +61,7 @@ class FollowersViewController: UIViewController {
     func createCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewFlowLayout())
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemPink
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCollectionViewCell.self, forCellWithReuseIdentifier: FollowerCollectionViewCell.reuseIdentifier)
             //register custom cell subclass
     }
@@ -74,10 +85,34 @@ class FollowersViewController: UIViewController {
         let cellWidth = availableWidthForCell / numberOfColumns
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: edgeInsetsPadding, left: edgeInsetsPadding, bottom: edgeInsetsPadding, right: edgeInsetsPadding)
+//        layout.sectionInset = UIEdgeInsets(top: edgeInsetsPadding, left: edgeInsetsPadding, bottom: edgeInsetsPadding, right: edgeInsetsPadding)
         layout.sectionInset = layout.setEdgeInsets(to: edgeInsetsPadding)
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth + 40)
         
         return layout
+    }
+    
+    func configureCollectionViewCell() {
+        
+        //set dataSource for cells / items
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: self.collectionView, cellProvider: {
+            (collectionView, indexPath, follower) -> UICollectionViewCell? in
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCollectionViewCell.reuseIdentifier, for: indexPath) as! FollowerCollectionViewCell
+            
+            //set usernameLabel text
+            cell.setUsernameLabel(text: follower.login)
+            return cell
+        })
+    }
+    
+    func updateCollectionViewDataWithSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(followers)
+        
+        //should be ok to update dataSource from background, but results in warnings if not wrapped in .main.async
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+        }
     }
 }

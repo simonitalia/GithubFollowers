@@ -86,13 +86,13 @@
 		2A48B3B723D8469600B00BD8 /* GithubFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				2A48B3E223DACDBE00B00BD8 /* Support */,
 				2A48B3F023DB113600B00BD8 /* Utilities */,
+				2A48B3E523DACDF800B00BD8 /* Extensions */,
 				2A48B3EF23DAF13B00B00BD8 /* Managers */,
 				2A48B3E823DAE28200B00BD8 /* Model */,
-				2A48B3E223DACDBE00B00BD8 /* Support */,
-				2A48B3E523DACDF800B00BD8 /* Extensions */,
-				2A48B3E323DACDD000B00BD8 /* Controllers */,
 				2A48B3E423DACDE800B00BD8 /* Views */,
+				2A48B3E323DACDD000B00BD8 /* Controllers */,
 				2A48B3C123D8469800B00BD8 /* Assets.xcassets */,
 				2A48B3C323D8469800B00BD8 /* LaunchScreen.storyboard */,
 				2A48B3C623D8469800B00BD8 /* Info.plist */,
