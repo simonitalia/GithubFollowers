@@ -10,6 +10,7 @@ import UIKit
 
 class FollowersViewController: UIViewController {
     
+    //UI Elements contained within VC
     var username: String!
 
     override func viewDidLoad() {
