@@ -35,8 +35,8 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         usernameLabel.text = text
     }
     
-    func set(avatarImageView image: UIImage) {
-        avatarImageView.image = image
+    func setAvatarImageView(from urlString: String) {
+        avatarImageView.fireGetImage(from: urlString)
     }
     
     

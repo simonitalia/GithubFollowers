@@ -6,11 +6,11 @@
 //  Copyright © 2020 SDI Group Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
-    let baseURL = "https://api.github.com/"
+    private let baseURL = "https://api.github.com/"
     
     private init() {
         
@@ -64,5 +64,41 @@ class NetworkManager {
     }
     
     
-    
+    func getImage(from urlString: String, completion: @escaping(UIImage?) -> Void) {
+        
+        //load image from imageCache (if already saved)
+        let imageCacheKey = NSString(string: urlString)
+        if let image = CacheManager.shared.imageCache.object(forKey: imageCacheKey) {
+            completion(image)
+            return
+        }
+        
+        //run get image if image not in imageCache
+        guard let url = URL(string: urlString) else { return }
+
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+
+            //check for error, and if so print error and exit method
+            if let error = error {
+                print("Error fetching image: \(error.localizedDescription)")
+                return
+            }
+
+            //check for server response code 200, else bail out
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
+
+            //check for data and assign to image
+            if let data = data {
+                guard let image = UIImage(data: data) else { return }
+
+                //save image to imageCache (using its urlString as the key)
+                CacheManager.shared.imageCache.setObject(image, forKey: imageCacheKey)
+
+                //pass image
+                completion(image)
+            }
+        }
+
+        task.resume()
+    }
 }

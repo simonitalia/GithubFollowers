@@ -78,8 +78,9 @@ class FollowersViewController: UIViewController {
             (collectionView, indexPath, follower) -> UICollectionViewCell? in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCollectionViewCell.reuseIdentifier, for: indexPath) as! FollowerCollectionViewCell
             
-            //set usernameLabel text
+            //set cell text and image
             cell.setUsernameLabel(text: follower.login)
+            cell.setAvatarImageView(from: follower.avatarUrl)
             return cell
         })
     }

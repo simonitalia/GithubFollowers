@@ -31,4 +31,18 @@ class GFAvatarImageView: UIImageView {
         image = UIImage(named: "avatar-placeholder") //in cases of null avatars, set placeholder image
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func fireGetImage(from urlString: String) {
+        NetworkManager.shared.getImage(from: urlString) { [weak self] (image) in
+            
+            guard let self = self else { return }
+            
+            //set image
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.image = image
+                }
+            }
+        }
+    }
 }

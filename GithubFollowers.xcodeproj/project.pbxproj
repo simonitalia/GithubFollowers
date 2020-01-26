@@ -28,6 +28,7 @@
 		2AEA116E23DC2063001A49C8 /* FollowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA116D23DC2063001A49C8 /* FollowerCollectionViewCell.swift */; };
 		2AEA117023DC21A2001A49C8 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA116F23DC21A2001A49C8 /* GFAvatarImageView.swift */; };
 		2AEA117223DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */; };
+		2AECC30B23DD9FEA0014908F /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AECC30A23DD9FEA0014908F /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		2AEA116D23DC2063001A49C8 /* FollowerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCollectionViewCell.swift; sourceTree = "<group>"; };
 		2AEA116F23DC21A2001A49C8 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
+		2AECC30A23DD9FEA0014908F /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CacheManager.swift; path = GithubFollowers/Managers/CacheManager.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		2A48B3EF23DAF13B00B00BD8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2AECC30A23DD9FEA0014908F /* CacheManager.swift */,
 				2A48B3ED23DAF12E00B00BD8 /* NetworkManager.swift */,
 			);
 			path = Managers;
@@ -262,6 +265,7 @@
 				2A48B3B923D8469600B00BD8 /* AppDelegate.swift in Sources */,
 				2A48B3F223DB115D00B00BD8 /* ErrorMessage.swift in Sources */,
 				2A48B3EE23DAF12E00B00BD8 /* NetworkManager.swift in Sources */,
+				2AECC30B23DD9FEA0014908F /* CacheManager.swift in Sources */,
 				2AEA117223DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
 				2A48B3CD23D8555400B00BD8 /* SearchViewController.swift in Sources */,
 				2A48B3BB23D8469600B00BD8 /* SceneDelegate.swift in Sources */,
