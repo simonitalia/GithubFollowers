@@ -10,11 +10,11 @@ import UIKit
 
 class GFBodyLabel: UILabel {
 
-     //MARK: UILabel object initializers
+    //MARK: - UILabel object initializers
     override init(frame: CGRect) {
-           super.init(frame: frame)
-//           configure()
-       }
+        super.init(frame: frame)
+        configure()
+    }
     
     //this is required for storyboard based apps
     required init?(coder: NSCoder) {
@@ -22,7 +22,7 @@ class GFBodyLabel: UILabel {
     }
     
     
-    //MARK: GFBodyLabel customizations
+    //MARK: - GFBodyLabel customizations
     init(textAlignment: NSTextAlignment) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment

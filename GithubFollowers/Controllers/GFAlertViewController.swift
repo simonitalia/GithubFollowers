@@ -10,7 +10,7 @@ import UIKit
 
 class GFAlertViewController: UIViewController {
     
-    //UI Elements contained within VC
+    //UI elements contained within VC
     let alertContainerView = GFAlertContainerView()
     
     let alertTitleLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
@@ -110,13 +110,5 @@ class GFAlertViewController: UIViewController {
     //dismiss alertVC
     @objc func dismissAlertViewController() {
         dismiss(animated: true, completion: nil)
-        
     }
-    
-   
-    
-    
-    
-    
-
 }

@@ -10,22 +10,22 @@ import UIKit
 
 class GFButton: UIButton {
     
-    // MARK: UIButton object initializers
+    // MARK: - UIButton object initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         //add GFButton customization ontop of underlying UIButton
-//        configure()
+        configure()
     }
     
     
-     //this is required for storyboard based apps
+    //this is required for storyboard based apps
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
-    //MARK: GFButton customizations
+    //MARK: - GFButton customizations
     init(backgroundColor: UIColor, title: String) {
         super.init(frame: .zero) //set to .zero since this will be set via auto layout
         self.backgroundColor = backgroundColor

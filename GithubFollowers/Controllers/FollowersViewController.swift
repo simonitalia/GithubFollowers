@@ -14,7 +14,7 @@ class FollowersViewController: UIViewController {
         case main
     }
     
-    //UI Elements contained within VC
+    //UI elements contained within VC
     var username: String!
     var totalFetchedFollowers = [Follower]()
     var page = 1
@@ -60,7 +60,19 @@ class FollowersViewController: UIViewController {
                 if deltaFetchedFollowers.count < NetworkManager.shared.followersToFetch {
                     self.hasMoreFollowers = false
                 }
+                
                 self.totalFetchedFollowers.append(contentsOf: deltaFetchedFollowers)
+                
+                //check for zero followers
+                if self.totalFetchedFollowers.isEmpty {
+                    let text = "User has 0 followers! 🙁\nMake their day and go follow them."
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(withLabelText: text, in: self.view)
+                    }
+                    
+                    return
+                }
+                
                 self.updateCollectionViewDataWithSnapshot()
                 print("Followers returned count: \(deltaFetchedFollowers.count)\n")
 //                print(followers)
@@ -141,7 +153,6 @@ extension FollowersViewController: UICollectionViewDelegate {
             fireGetFollowers(for: username, from: page)
         }
     }
-    
 }
 
 

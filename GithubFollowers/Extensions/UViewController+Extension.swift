@@ -60,5 +60,11 @@ extension UIViewController {
             containerView = nil
        }
     }
+    
+    func showEmptyStateView(withLabelText text: String, in parentView: UIView) {
+        let emptyStateView = GFEmptyStateView(labelText: text)
+        emptyStateView.frame = parentView.bounds
+        parentView.addSubview(emptyStateView)
+    }
 }
 

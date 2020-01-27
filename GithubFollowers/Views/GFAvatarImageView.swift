@@ -10,9 +10,10 @@ import UIKit
 
 class GFAvatarImageView: UIImageView {
     
+    //UI Elements contained within UIView
     let placeholderImage = UIImage(named: "avatar-placeholder")
 
-    //MARK: UIImageView object initializers
+    //MARK: - UIImageView object initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -24,11 +25,11 @@ class GFAvatarImageView: UIImageView {
     }
     
     
-    //MARK: GFUIImageView customizations
+    //MARK: - GFUIImageView customizations
     private func configure() {
         layer.cornerRadius = 10 //applies to imageView radius, not image itself
         clipsToBounds = true //clip the image itself to the bounds of the view
-        image = UIImage(named: "avatar-placeholder") //in cases of null avatars, set placeholder image
+        image = placeholderImage //in cases of null avatars, set placeholder image
         translatesAutoresizingMaskIntoConstraints = false
     }
     

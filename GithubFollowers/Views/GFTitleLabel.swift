@@ -10,11 +10,11 @@ import UIKit
 
 class GFTitleLabel: UILabel {
 
-    //MARK: UILabel object initializers
+    //MARK: - UILabel object initializers
     override init(frame: CGRect) {
-           super.init(frame: frame)
-//           configure()
-       }
+        super.init(frame: frame)
+        configure()
+    }
     
     //this is required for storyboard based apps
     required init?(coder: NSCoder) {
@@ -22,7 +22,7 @@ class GFTitleLabel: UILabel {
     }
     
     
-    //MARK: GFTitleLabel customizations
+    //MARK: - GFTitleLabel customizations
     init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment

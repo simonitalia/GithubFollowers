@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    //UI Elements contained within VC
+    //UI elements contained within VC
     let logoImageView = UIImageView()
     let usernameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
@@ -113,5 +113,4 @@ extension SearchViewController: UITextFieldDelegate {
         pushToFollowersViewController()
         return true
     }
-    
 }
