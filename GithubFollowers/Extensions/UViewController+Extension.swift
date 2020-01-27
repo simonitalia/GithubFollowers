@@ -8,8 +8,11 @@
 
 import UIKit
 
+fileprivate var containerView: UIView!
+
 extension UIViewController {
     
+    //MARK: - alert
     func presentGFAlertViewController(title: String, message: String, buttonTitle: String) {
         
         //present on main thread
@@ -20,6 +23,42 @@ extension UIViewController {
             vc.modalTransitionStyle = .crossDissolve
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    //MARK: - activity indicator
+    func showLoadingSpinner() {
+        
+        //configure containerView
+        containerView = UIView(frame: view.bounds)
+        view.addSubview(containerView)
+        
+        containerView.backgroundColor = .systemBackground
+        containerView.alpha = 0
+        
+        //animate container view into view
+        UIView.animate(withDuration: 0.25) {
+            containerView.alpha = 0.8
+        }
+        
+        //create and configure spinner
+        let spinner = UIActivityIndicatorView(style: .large)
+        containerView.addSubview(spinner)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        
+        //place spinner in center of housing view (x and y axis)
+        NSLayoutConstraint.activate([
+            spinner.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+             spinner.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+        ])
+        
+        spinner.startAnimating()
+    }
+    
+    func hideLoadingSpinner() {
+        DispatchQueue.main.async {
+            containerView.removeFromSuperview()
+            containerView = nil
+       }
     }
 }
 

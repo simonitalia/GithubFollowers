@@ -44,8 +44,14 @@ class FollowersViewController: UIViewController {
         //first check if user has more followers to fetch
         guard hasMoreFollowers == true else { return }
         
+        //start network call
+        showLoadingSpinner()
+        
         NetworkManager.shared.getFollowers(for: username, from: page) { [weak self] (result) in
+            
             guard let self = self else { return }
+            
+            self.hideLoadingSpinner()
             
             switch result {
             case .success(let deltaFetchedFollowers):
