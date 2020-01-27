@@ -16,7 +16,10 @@ class FollowersViewController: UIViewController {
     
     //UI Elements contained within VC
     var username: String!
-    var followers = [Follower]()
+    var totalFetchedFollowers = [Follower]()
+    var page = 1
+    var hasMoreFollowers = true
+        //track if user has more followers left to fetch (after fetchuing in icrementts of 100
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -26,7 +29,7 @@ class FollowersViewController: UIViewController {
         super.viewDidLoad()
         configureViewController()
         createCollectionView()
-        fireGetFollowers()
+        fireGetFollowers(for: username, from: page)
         configureCollectionViewCell()
     }
     
@@ -36,15 +39,24 @@ class FollowersViewController: UIViewController {
     }
     
     
-    func fireGetFollowers() {
-        NetworkManager.shared.getFollowers(for: username, page: 1) { [weak self] (result) in
+    func fireGetFollowers(for username: String, from page: Int) {
+        
+        //first check if user has more followers to fetch
+        guard hasMoreFollowers == true else { return }
+        
+        NetworkManager.shared.getFollowers(for: username, from: page) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
-            case .success(let followers):
-                self.followers = followers
+            case .success(let deltaFetchedFollowers):
+                
+                //check if user has more followers to fetch and update flag if not
+                if deltaFetchedFollowers.count < NetworkManager.shared.followersToFetch {
+                    self.hasMoreFollowers = false
+                }
+                self.totalFetchedFollowers.append(contentsOf: deltaFetchedFollowers)
                 self.updateCollectionViewDataWithSnapshot()
-                print("Followers.count: \(followers.count)\n")
+                print("Followers returned count: \(deltaFetchedFollowers.count)\n")
 //                print(followers)
                 
             case .failure(let error):
@@ -65,6 +77,7 @@ class FollowersViewController: UIViewController {
         //create collectionView (with layout obejct)
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         view.addSubview(collectionView)
+        collectionView.delegate = self
         
         //configure collectionView
         collectionView.backgroundColor = .systemBackground
@@ -85,10 +98,11 @@ class FollowersViewController: UIViewController {
         })
     }
     
+    //call this method after data is returned from the remote server
     func updateCollectionViewDataWithSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(followers)
+        snapshot.appendItems(totalFetchedFollowers)
         
         //should be ok to update dataSource from background, but results in warnings if not wrapped in .main.async
         DispatchQueue.main.async {
@@ -96,3 +110,34 @@ class FollowersViewController: UIViewController {
         }
     }
 }
+
+extension FollowersViewController: UICollectionViewDelegate {
+    
+    //configure content parameters using scrollViewDelegete (nb: UICollectionView is a sublclass of UIScrollView)
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        //first check if user has more followers to fetch
+        guard hasMoreFollowers == true else { return }
+        
+        let contentOffsetY = scrollView.contentOffset.y //how far user has scrolled along y axis
+        let contentHeight = scrollView.contentSize.height //entire height of scrollView
+        let frameHeight = scrollView.frame.size.height //screen size height
+        
+        //print statementes for seeing actual values (based on iphone size run of)
+//        print("contentOffsetY: \(contentOffsetY)")
+//        print("contentHeight: \(contentHeight)")
+//        print("frameHeight: \(frameHeight)")
+        
+        //trigger get next 100 followers from page n
+        if contentOffsetY > contentHeight - frameHeight {
+//            guard hasMoreFollowers == true else { return }
+            page += 1 //increment page number
+            fireGetFollowers(for: username, from: page)
+        }
+    }
+    
+}
+
+
+
+

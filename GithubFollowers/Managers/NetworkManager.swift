@@ -11,15 +11,17 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com/"
+    let followersToFetch = 100 //100 followers per call
     
     private init() {
         
     }
     
-    //completion type using Swift 5's new result type
-    func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], GFError>) -> Void) {
+    //completion Result type using Swift 5's new result type
+    func getFollowers(for username: String, from page: Int, completion: @escaping (Result<[Follower], GFError>) -> Void) {
         let usernameUrl = "users/\(username)/followers"
-        let pageUrl = "?per_page=100&page=\(page)"
+//        let followersToFetch = "100" //100 followers per call
+        let pageUrl = "?per_page=\(String(followersToFetch))&page=\(page)"
         let fullUrl = baseURL+usernameUrl+pageUrl
 //        print("\(fullUrl)/n")
         
