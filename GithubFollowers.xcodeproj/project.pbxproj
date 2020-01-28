@@ -30,6 +30,7 @@
 		2AEA117223DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */; };
 		2AECC30B23DD9FEA0014908F /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AECC30A23DD9FEA0014908F /* CacheManager.swift */; };
 		2AECC30D23DF0BC00014908F /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AECC30C23DF0BC00014908F /* GFEmptyStateView.swift */; };
+		2AECC30F23DFBD800014908F /* FollowerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AECC30E23DFBD800014908F /* FollowerDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
 		2AECC30A23DD9FEA0014908F /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CacheManager.swift; path = GithubFollowers/Managers/CacheManager.swift; sourceTree = SOURCE_ROOT; };
 		2AECC30C23DF0BC00014908F /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = SOURCE_ROOT; };
+		2AECC30E23DFBD800014908F /* FollowerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FollowerDetailViewController.swift; path = GithubFollowers/Controllers/FollowerDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				2A48B3D823D9A99E00B00BD8 /* GFAlertViewController.swift */,
 				2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */,
 				2A48B3D223D9776700B00BD8 /* FollowersViewController.swift */,
+				2AECC30E23DFBD800014908F /* FollowerDetailViewController.swift */,
 				2A48B3BC23D8469600B00BD8 /* FavoritesViewController.swift */,
 			);
 			path = Controllers;
@@ -259,6 +262,7 @@
 				2A48B3CF23D86A8700B00BD8 /* GFButton.swift in Sources */,
 				2A48B3D723D9A84700B00BD8 /* GFBodyLabel.swift in Sources */,
 				2A48B3EC23DAEA2600B00BD8 /* User.swift in Sources */,
+				2AECC30F23DFBD800014908F /* FollowerDetailViewController.swift in Sources */,
 				2A48B3D923D9A99E00B00BD8 /* GFAlertViewController.swift in Sources */,
 				2AEA117023DC21A2001A49C8 /* GFAvatarImageView.swift in Sources */,
 				2AEA116E23DC2063001A49C8 /* FollowerCollectionViewCell.swift in Sources */,

@@ -22,6 +22,7 @@ class FollowersViewController: UIViewController {
         //track if user has more followers left to fetch (after fetchuing in icrementts of 100
     
     var filteredFollowers = [Follower]() //for storing followers that match search text criteria
+    var isSearching = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -100,7 +101,7 @@ class FollowersViewController: UIViewController {
         sc.searchBar.delegate = self
         
         sc.searchBar.placeholder = "search by username"
-        sc.obscuresBackgroundDuringPresentation = true //set to false to not dim view when searching
+        sc.obscuresBackgroundDuringPresentation = false //set to true to dim view when searching, but this affects functionality which needs to be handled
         
         //embed the search controller inside navigation bar
         navigationItem.searchController = sc
@@ -177,6 +178,16 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activeArray = isSearching ? filteredFollowers : totalFetchedFollowers
+        let follower = activeArray[indexPath.item]
+        
+        let destinationVC = FollowerDetailViewController()
+        destinationVC.follower = follower
+        let nc = UINavigationController(rootViewController: destinationVC)
+        present(nc, animated: true)
+    }
+    
     
     //MARK: - UISearchResultsUpdaing delegate
     //filter UICollectionView data with entered searchBar text
@@ -184,6 +195,7 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return }
         
         //fill array of filteredFollowers, matching searchText
+        isSearching = true
         filteredFollowers = totalFetchedFollowers.filter { $0.login.lowercased().contains(searchText.lowercased())
         }
         
@@ -192,6 +204,7 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
     
     //reset UICollectionView data to full data set on searchBar cancel
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
         updateCollectionViewSnapshotData(with: totalFetchedFollowers)
     }
 }
