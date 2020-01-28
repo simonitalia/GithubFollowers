@@ -10,7 +10,7 @@ import Foundation
 
 struct Follower: Codable, Hashable { //both properties conforom to Hashable property, for use with  diffableDataSource
     
-    var login: String
-    var avatarUrl: String
+    let login: String
+    let avatarUrl: String
         //will convert from snake_case to camelCase when invoking JSONDecoder()
 }

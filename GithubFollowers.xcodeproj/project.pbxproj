@@ -163,8 +163,8 @@
 		2A48B3EF23DAF13B00B00BD8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				2AECC30A23DD9FEA0014908F /* CacheManager.swift */,
 				2A48B3ED23DAF12E00B00BD8 /* NetworkManager.swift */,
+				2AECC30A23DD9FEA0014908F /* CacheManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";

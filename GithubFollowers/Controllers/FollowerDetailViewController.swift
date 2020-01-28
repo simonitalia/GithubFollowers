@@ -17,7 +17,20 @@ class FollowerDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton
-        print(follower.login)
+
+        
+        let username = follower.login
+        NetworkManager.shared.getUser(for: username) { [weak self ] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let user):
+                print(user)
+            
+            case .failure(let error):
+                self.presentGFAlertViewController(title: "Error Fetching User!", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
     }
     
     @objc func dismissVC() {
