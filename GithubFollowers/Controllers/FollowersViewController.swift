@@ -21,6 +21,8 @@ class FollowersViewController: UIViewController {
     var hasMoreFollowers = true
         //track if user has more followers left to fetch (after fetchuing in icrementts of 100
     
+    var filteredFollowers = [Follower]() //for storing followers that match search text criteria
+    
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
         //note, both objects (in this case Secton + Follower), must conform to Hashable
@@ -28,6 +30,7 @@ class FollowersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        createSearchController()
         createCollectionView()
         fireGetFollowers(for: username, from: page)
         configureCollectionViewCell()
@@ -73,7 +76,7 @@ class FollowersViewController: UIViewController {
                     return
                 }
                 
-                self.updateCollectionViewDataWithSnapshot()
+                self.updateCollectionViewSnapshotData(with: self.totalFetchedFollowers)
                 print("Followers returned count: \(deltaFetchedFollowers.count)\n")
 //                print(followers)
                 
@@ -83,10 +86,26 @@ class FollowersViewController: UIViewController {
         }
     }
     
+    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
+    
+    func createSearchController() {
+        let sc = UISearchController()
+        
+        sc.searchResultsUpdater = self
+        sc.searchBar.delegate = self
+        
+        sc.searchBar.placeholder = "search by username"
+        sc.obscuresBackgroundDuringPresentation = true //set to false to not dim view when searching
+        
+        //embed the search controller inside navigation bar
+        navigationItem.searchController = sc
+    }
+    
     
     func createCollectionView() {
         //create flow layout object
@@ -102,6 +121,7 @@ class FollowersViewController: UIViewController {
         collectionView.register(FollowerCollectionViewCell.self, forCellWithReuseIdentifier: FollowerCollectionViewCell.reuseIdentifier) //registers our custom cell subclass
     }
     
+    
     func configureCollectionViewCell() {
         
         //set dataSource for cells / items
@@ -116,11 +136,12 @@ class FollowersViewController: UIViewController {
         })
     }
     
+    
     //call this method after data is returned from the remote server
-    func updateCollectionViewDataWithSnapshot() {
+    func updateCollectionViewSnapshotData(with followers: [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(totalFetchedFollowers)
+        snapshot.appendItems(followers)
         
         //should be ok to update dataSource from background, but results in warnings if not wrapped in .main.async
         DispatchQueue.main.async {
@@ -129,8 +150,10 @@ class FollowersViewController: UIViewController {
     }
 }
 
-extension FollowersViewController: UICollectionViewDelegate {
-    
+
+extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+   
+    //MARK: - UICollectionView delegate
     //configure content parameters using scrollViewDelegete (nb: UICollectionView is a sublclass of UIScrollView)
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
@@ -153,8 +176,22 @@ extension FollowersViewController: UICollectionViewDelegate {
             fireGetFollowers(for: username, from: page)
         }
     }
+    
+    
+    //MARK: - UISearchResultsUpdaing delegate
+    //filter UICollectionView data with entered searchBar text
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return }
+        
+        //fill array of filteredFollowers, matching searchText
+        filteredFollowers = totalFetchedFollowers.filter { $0.login.lowercased().contains(searchText.lowercased())
+        }
+        
+        updateCollectionViewSnapshotData(with: filteredFollowers)
+    }
+    
+    //reset UICollectionView data to full data set on searchBar cancel
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateCollectionViewSnapshotData(with: totalFetchedFollowers)
+    }
 }
-
-
-
-
