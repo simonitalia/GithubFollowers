@@ -19,15 +19,15 @@ class FollowersViewController: UIViewController {
     var totalFetchedFollowers = [Follower]()
     var page = 1
     var hasMoreFollowers = true
-        //track if user has more followers left to fetch (after fetchuing in icrementts of 100
+    //track if user has more followers left to fetch (after fetchuing in icrementts of 100
     
     var filteredFollowers = [Follower]() //for storing followers that match search text criteria
     var isSearching = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
-        //note, both objects (in this case Secton + Follower), must conform to Hashable
-
+    //note, both objects (in this case Secton + Follower), must conform to Hashable
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
@@ -40,6 +40,26 @@ class FollowersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    
+    func createSearchController() {
+        let sc = UISearchController()
+        
+        sc.searchResultsUpdater = self
+        sc.searchBar.delegate = self
+        
+        sc.searchBar.placeholder = "search by username"
+        sc.obscuresBackgroundDuringPresentation = false //set to true to dim view when searching, but this affects functionality which needs to be handled
+        
+        //embed the search controller inside navigation bar
+        navigationItem.searchController = sc
     }
     
     
@@ -79,32 +99,12 @@ class FollowersViewController: UIViewController {
                 
                 self.updateCollectionViewSnapshotData(with: self.totalFetchedFollowers)
                 print("Followers returned count: \(deltaFetchedFollowers.count)\n")
-//                print(followers)
+                //                print(followers)
                 
             case .failure(let error):
                 self.presentGFAlertViewController(title: "Error Fetching Data!", message: error.rawValue, buttonTitle: "OK")
             }
         }
-    }
-    
-    
-    func configureViewController() {
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    
-    func createSearchController() {
-        let sc = UISearchController()
-        
-        sc.searchResultsUpdater = self
-        sc.searchBar.delegate = self
-        
-        sc.searchBar.placeholder = "search by username"
-        sc.obscuresBackgroundDuringPresentation = false //set to true to dim view when searching, but this affects functionality which needs to be handled
-        
-        //embed the search controller inside navigation bar
-        navigationItem.searchController = sc
     }
     
     
@@ -128,7 +128,7 @@ class FollowersViewController: UIViewController {
         //set dataSource for cells / items
         dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: self.collectionView, cellProvider: {
             (collectionView, indexPath, follower) -> UICollectionViewCell? in
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCollectionViewCell.reuseIdentifier, for: indexPath) as! FollowerCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCollectionViewCell.reuseIdentifier, for: indexPath) as! FollowerCollectionViewCell
             
             //set cell text and image
             cell.setUsernameLabel(text: follower.login)
@@ -153,7 +153,7 @@ class FollowersViewController: UIViewController {
 
 
 extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-   
+    
     //MARK: - UICollectionView delegate
     //configure content parameters using scrollViewDelegete (nb: UICollectionView is a sublclass of UIScrollView)
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -166,13 +166,13 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         let frameHeight = scrollView.frame.size.height //screen size height
         
         //print statementes for seeing actual values (based on iphone size run of)
-//        print("contentOffsetY: \(contentOffsetY)")
-//        print("contentHeight: \(contentHeight)")
-//        print("frameHeight: \(frameHeight)")
+        //        print("contentOffsetY: \(contentOffsetY)")
+        //        print("contentHeight: \(contentHeight)")
+        //        print("frameHeight: \(frameHeight)")
         
         //trigger get next 100 followers from page n
         if contentOffsetY > contentHeight - frameHeight {
-//            guard hasMoreFollowers == true else { return }
+            //            guard hasMoreFollowers == true else { return }
             page += 1 //increment page number
             fireGetFollowers(for: username, from: page)
         }
@@ -183,7 +183,7 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         let follower = activeArray[indexPath.item]
         
         let destinationVC = FollowerDetailViewController()
-        destinationVC.follower = follower
+        destinationVC.followerLogin = follower.login
         let nc = UINavigationController(rootViewController: destinationVC)
         present(nc, animated: true)
     }

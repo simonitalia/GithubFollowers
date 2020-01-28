@@ -23,8 +23,6 @@ class GFTextField: UITextField {
     
     //MARK: - GFTextField customizations
     private func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
-        
         layer.cornerRadius = 10
         layer.borderWidth = 2
         layer.borderColor = UIColor.systemGray4.cgColor
@@ -37,7 +35,8 @@ class GFTextField: UITextField {
         adjustsFontSizeToFitWidth = true //shrink to fit text
         minimumFontSize = 12 //don't shrink text beyond 12
         returnKeyType = .go //sets text of return key shown in kb
-        placeholder = "Enter username" 
+        placeholder = "Enter username"
+        translatesAutoresizingMaskIntoConstraints = false
     }
 
 }
