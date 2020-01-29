@@ -17,8 +17,9 @@ class FollowerDetailHeaderViewController: UIViewController {
     let locationImageView = UIImageView()
     let locationLabel = GFSecondaryTitleLabel(fontSize: 18)
     let bioLabel = GFBodyLabel(textAlignment: .left)
+    var itemViews = [UIView]()
     
-    var user: User!
+    var user: User! //passed in as an initializer argument when this VC is initialized
 
     //this is required for storyboard based apps
     required init?(coder: NSCoder) {
@@ -54,12 +55,10 @@ class FollowerDetailHeaderViewController: UIViewController {
     
     
     func addSubviews() {
-        view.addSubview(avatarImageView)
-        view.addSubview(usernameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
+        itemViews = [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel]
+        for itemView in itemViews {
+            view.addSubview(itemView)
+        }
     }
     
     

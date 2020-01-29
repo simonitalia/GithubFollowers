@@ -11,7 +11,7 @@ import UIKit
 class FollowersViewController: UIViewController {
     
     enum Section { //enums by default conform to Hashable protocol
-        case main
+       case main
     }
     
     //UI elements contained within VC
