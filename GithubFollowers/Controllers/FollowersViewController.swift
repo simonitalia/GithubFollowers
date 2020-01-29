@@ -19,14 +19,14 @@ class FollowersViewController: UIViewController {
     var totalFetchedFollowers = [Follower]()
     var page = 1
     var hasMoreFollowers = true
-    //track if user has more followers left to fetch (after fetchuing in icrementts of 100
+        //track if user has more followers left to fetch (after fetchuing in icrementts of 100
     
     var filteredFollowers = [Follower]() //for storing followers that match search text criteria
     var isSearching = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
-    //note, both objects (in this case Secton + Follower), must conform to Hashable
+        //note, both objects (in this case Secton + Follower), must conform to Hashable
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,13 +166,12 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         let frameHeight = scrollView.frame.size.height //screen size height
         
         //print statementes for seeing actual values (based on iphone size run of)
-        //        print("contentOffsetY: \(contentOffsetY)")
-        //        print("contentHeight: \(contentHeight)")
-        //        print("frameHeight: \(frameHeight)")
+//        print("contentOffsetY: \(contentOffsetY)")
+//        print("contentHeight: \(contentHeight)")
+//        print("frameHeight: \(frameHeight)")
         
         //trigger get next 100 followers from page n
         if contentOffsetY > contentHeight - frameHeight {
-            //            guard hasMoreFollowers == true else { return }
             page += 1 //increment page number
             fireGetFollowers(for: username, from: page)
         }

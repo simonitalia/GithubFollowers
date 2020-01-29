@@ -13,6 +13,7 @@ class FollowerDetailViewController: UIViewController {
     let headerView = UIView()
     let itemViewOne = UIView()
     let itemViewTwo = UIView()
+    var dateLabel = GFBodyLabel(textAlignment: .center)
     var itemViews = [UIView]()
     
     var followerLogin: String!
@@ -34,7 +35,7 @@ class FollowerDetailViewController: UIViewController {
     
     
     private func addUIElements() {
-        itemViews = [headerView, itemViewOne, itemViewTwo]
+        itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
         for itemView in itemViews {
             view.addSubview(itemView)
         }
@@ -42,13 +43,10 @@ class FollowerDetailViewController: UIViewController {
     
     
     private func configureUILayout() {
-//        itemViews = [headerView, itemViewOne, itemViewTwo]
-        
         let padding: CGFloat = 20
-        let itemHeight: CGFloat = 140
+        let itemViewHeight: CGFloat = 140
         
         for itemView in itemViews {
-//            view.addSubview(itemView)
             itemView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
@@ -57,9 +55,6 @@ class FollowerDetailViewController: UIViewController {
             ])
         }
         
-//        itemViewOne.backgroundColor = .systemPink
-//        itemViewTwo.backgroundColor = .systemBlue
-        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 180)
@@ -67,12 +62,17 @@ class FollowerDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
-            itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight)
+            itemViewOne.heightAnchor.constraint(equalToConstant: itemViewHeight)
         ])
         
         NSLayoutConstraint.activate([
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
-            itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight)
+            itemViewTwo.heightAnchor.constraint(equalToConstant: itemViewHeight)
+        ])
+        
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
     
@@ -89,13 +89,16 @@ class FollowerDetailViewController: UIViewController {
                     let headerVC = FollowerDetailHeaderViewController(user: user)
                     self.addChild(viewController: headerVC, to: self.headerView)
                     
-                    //set card one
+                    //set itemView one
                     let itemViewOneVC = FollowerDetailItemRepoViewController(user: user)
                     self.addChild(viewController: itemViewOneVC, to: self.itemViewOne)
                     
-                    //set card two
+                    //set itemViewTwo
                     let itemViewTwoVC = FollowerDetailItemFollowerViewController(user: user)
                     self.addChild(viewController: itemViewTwoVC, to: self.itemViewTwo)
+                    
+                    //set dateLabel
+                    self.dateLabel.text = "GitHub Since: "+user.createdAt.convertToFormattedDate()
                 }
 //                print(user)
                 
