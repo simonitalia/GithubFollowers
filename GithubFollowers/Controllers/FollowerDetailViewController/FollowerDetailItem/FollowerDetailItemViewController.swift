@@ -15,20 +15,41 @@ class FollowerDetailItemViewController: UIViewController {
     let itemViewOne = GFItemView()
     let itemViewTwo = GFItemView()
     let callToActionButton = GFButton()
-
+        //not using custom init, since properties will be applied by subclass VCs
+    
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundView()
+        addUIElements()
         configureUIElements()
         configureUILayout()
     }
     
     
+    //this is required for storyboard based apps
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     //MARK: FollowerDetailItemViewController customizations
+    init(user: User) {
+        super.init(nibName: nil, bundle: nil)
+        self.user = user
+    }
+    
+    
     private func configureBackgroundView() {
         view.layer.cornerRadius = 18
         view.backgroundColor = .secondarySystemBackground
+    }
+    
+    
+    private func addUIElements() {
+        view.addSubview(stackView)
+        view.addSubview(callToActionButton)
     }
     
     
@@ -43,9 +64,6 @@ class FollowerDetailItemViewController: UIViewController {
     
     
     private func configureUILayout() {
-        view.addSubview(stackView)
-        view.addSubview(callToActionButton)
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         let padding: CGFloat = 20

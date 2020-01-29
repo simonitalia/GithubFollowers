@@ -19,7 +19,8 @@ class FollowerDetailHeaderViewController: UIViewController {
     let bioLabel = GFBodyLabel(textAlignment: .left)
     var itemViews = [UIView]()
     
-    var user: User! //passed in as an initializer argument when this VC is initialized
+    var user: User!
+        //passed in as an initializer argument when this VC is initialized
 
     //this is required for storyboard based apps
     required init?(coder: NSCoder) {
@@ -41,14 +42,14 @@ class FollowerDetailHeaderViewController: UIViewController {
         configureUILayout()
     }
     
-    func addUIElements() {
+    private func addUIElements() {
         itemViews = [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel]
         for itemView in itemViews {
             view.addSubview(itemView)
         }
     }
     
-    func configureUIElements() {
+    private func configureUIElements() {
         avatarImageView.fireGetImage(from: user.avatarUrl)
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? ""
@@ -60,7 +61,7 @@ class FollowerDetailHeaderViewController: UIViewController {
         locationImageView.tintColor = .secondaryLabel
     }
     
-    func configureUILayout() {
+    private func configureUILayout() {
         let padding: CGFloat = 20
         let textImagePadding: CGFloat = 12
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
