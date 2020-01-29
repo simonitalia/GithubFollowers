@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 fileprivate var containerView: UIView!
 
@@ -54,6 +55,7 @@ extension UIViewController {
         spinner.startAnimating()
     }
     
+    
     func hideLoadingSpinner() {
         DispatchQueue.main.async {
             containerView.removeFromSuperview()
@@ -61,10 +63,17 @@ extension UIViewController {
        }
     }
     
+    
     func showEmptyStateView(withLabelText text: String, in parentView: UIView) {
         let emptyStateView = GFEmptyStateView(labelText: text)
         emptyStateView.frame = parentView.bounds
         parentView.addSubview(emptyStateView)
+    }
+    
+    func presentSafariViewController(with url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredControlTintColor = .systemGreen
+        present(safariVC, animated: true)
     }
 }
 

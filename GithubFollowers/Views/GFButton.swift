@@ -33,6 +33,7 @@ class GFButton: UIButton {
         configure()
     }
     
+    
     private func configure() {
         layer.cornerRadius = 10
         setTitleColor(.white, for: .normal)
@@ -40,8 +41,10 @@ class GFButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func set(backgroundColor: UIColor, title: String) {
+    
+    func set(backgroundColor: UIColor, title: String, tag: Int) {
         self.backgroundColor = backgroundColor
         setTitle(title, for: .normal)
+        self.tag = tag
     }
 }

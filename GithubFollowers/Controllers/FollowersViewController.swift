@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FollowersViewControllerDelegate: class {
+    func didRequestFollowers(for username: String)
+}
+
 class FollowersViewController: UIViewController {
     
     enum Section { //enums by default conform to Hashable protocol
@@ -182,7 +186,8 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         let follower = activeArray[indexPath.item]
         
         let destinationVC = FollowerDetailViewController()
-        destinationVC.followerLogin = follower.login
+        destinationVC.username = follower.login
+        destinationVC.delegate = self
         let nc = UINavigationController(rootViewController: destinationVC)
         present(nc, animated: true)
     }
@@ -205,5 +210,19 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
         updateCollectionViewSnapshotData(with: totalFetchedFollowers)
+    }
+}
+
+extension FollowersViewController: FollowersViewControllerDelegate {
+    func didRequestFollowers(for username: String) {
+        
+        //reset VC and trigger fetch of follwers for user
+        self.username = username
+        title = username
+        page = 1
+        totalFetchedFollowers.removeAll()
+        filteredFollowers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true) //scroll back to top
+        fireGetFollowers(for: username, from: page)
     }
 }

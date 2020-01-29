@@ -8,6 +8,7 @@
 
 import UIKit
 
+//super class for FollowerDetailItemRepoViewController + FollowerDetailItemFollowerViewController
 class FollowerDetailItemViewController: UIViewController {
     
     //UI elements contained within VC
@@ -18,12 +19,14 @@ class FollowerDetailItemViewController: UIViewController {
         //not using custom init, since properties will be applied by subclass VCs
     
     var user: User!
+    weak var delegate: FollowerDetailViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundView()
         addUIElements()
         configureUIElements()
+        configureCallToActionButtonTarget()
         configureUILayout()
     }
     
@@ -61,6 +64,14 @@ class FollowerDetailItemViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
     }
+    
+    
+    private func configureCallToActionButtonTarget() {
+        callToActionButton.addTarget(self, action: #selector(callToActionButtonTapped), for: .touchUpInside)
+    }
+    
+    
+    @objc func callToActionButtonTapped() {}
     
     
     private func configureUILayout() {

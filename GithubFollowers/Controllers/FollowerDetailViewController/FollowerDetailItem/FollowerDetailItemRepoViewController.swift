@@ -20,7 +20,10 @@ class FollowerDetailItemRepoViewController: FollowerDetailItemViewController {
     private func configure() {
         itemViewOne.set(itemType: .repos, withCount: user.publicRepos)
         itemViewTwo.set(itemType: .gists, withCount: user.publicGists)
-        
-        callToActionButton.set(backgroundColor: .systemPurple, title: "GitHub Profile")
+        callToActionButton.set(backgroundColor: .systemPurple, title: "GitHub Profile", tag: 0)
+    }
+    
+    override func callToActionButtonTapped() {
+        delegate.didTapDetailItemButton(with: callToActionButton.tag, for: user)
     }
 }

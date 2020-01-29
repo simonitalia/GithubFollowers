@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FollowerDetailViewControllerDelegate: class {
+    func didTapDetailItemButton(with tag: Int, for user: User)
+}
+
 class FollowerDetailViewController: UIViewController {
     
     let headerView = UIView()
@@ -16,7 +20,10 @@ class FollowerDetailViewController: UIViewController {
     var dateLabel = GFBodyLabel(textAlignment: .center)
     var itemViews = [UIView]()
     
-    var followerLogin: String!
+    var username: String!
+//    var user: User!
+    
+    weak var delegate: FollowersViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +40,51 @@ class FollowerDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
     
+
+    private func fireGetUser() {
+        NetworkManager.shared.getUser(for: username) { [weak self ] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let user):
+                DispatchQueue.main.async {
+//                    self.user = user //setting up for refactoring of user. Might cause sync issues
+                    self.configureUIElements(user: user)
+                }
+
+            case .failure(let error):
+                self.presentGFAlertViewController(title: "Error Fetching User!", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
+    }
+    
     
     private func addUIElements() {
         itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
         for itemView in itemViews {
             view.addSubview(itemView)
         }
+    }
+    
+    
+    private func configureUIElements(user: User) {
+        
+        //set header
+        let headerVC = FollowerDetailHeaderViewController(user: user)
+        self.addChild(viewController: headerVC, to: self.headerView)
+        
+        //set itemView one
+        let itemViewOneVC = FollowerDetailItemRepoViewController(user: user)
+        itemViewOneVC.delegate = self
+        self.addChild(viewController: itemViewOneVC, to: self.itemViewOne)
+        
+        //set itemViewTwo
+        let itemViewTwoVC = FollowerDetailItemFollowerViewController(user: user)
+        itemViewTwoVC.delegate = self
+        self.addChild(viewController: itemViewTwoVC, to: self.itemViewTwo)
+        
+        //set dateLabel
+        self.dateLabel.text = "GitHub Since: "+user.createdAt.convertToFormattedDate()
     }
     
     
@@ -76,37 +122,7 @@ class FollowerDetailViewController: UIViewController {
         ])
     }
     
-    private func fireGetUser() {
-        let username = followerLogin!
-        NetworkManager.shared.getUser(for: username) { [weak self ] (result) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let user):
-                
-                DispatchQueue.main.async {
-                    //set header
-                    let headerVC = FollowerDetailHeaderViewController(user: user)
-                    self.addChild(viewController: headerVC, to: self.headerView)
-                    
-                    //set itemView one
-                    let itemViewOneVC = FollowerDetailItemRepoViewController(user: user)
-                    self.addChild(viewController: itemViewOneVC, to: self.itemViewOne)
-                    
-                    //set itemViewTwo
-                    let itemViewTwoVC = FollowerDetailItemFollowerViewController(user: user)
-                    self.addChild(viewController: itemViewTwoVC, to: self.itemViewTwo)
-                    
-                    //set dateLabel
-                    self.dateLabel.text = "GitHub Since: "+user.createdAt.convertToFormattedDate()
-                }
-//                print(user)
-                
-            case .failure(let error):
-                self.presentGFAlertViewController(title: "Error Fetching User!", message: error.rawValue, buttonTitle: "OK")
-            }
-        }
-    }
+
     
     //function to add childrenVCs to this VC
     private func addChild(viewController: UIViewController, to containerView: UIView) {
@@ -120,5 +136,31 @@ class FollowerDetailViewController: UIViewController {
     @objc func dismissViewController() {
         dismiss(animated: true, completion: nil)
     }
-    
+}
+
+
+extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
+    func didTapDetailItemButton(with tag: Int, for user: User) {
+        
+        //show github profile in safariVC
+        if tag == 0 {
+            guard let url = URL(string: user.htmlUrl) else {
+                presentGFAlertViewController(title: "Invalid Url!", message: "User's Profile could not be loaded.", buttonTitle: "OK")
+                return
+            }
+            
+            presentSafariViewController(with: url)
+        }
+        
+        //dismiss child DetailItem screem and load FollowersVC with followers of user tapped
+        if tag == 1 {
+            guard user.followers != 0 else {
+                presentGFAlertViewController(title: "No Followers!", message: "This user has no followers. 🙁", buttonTitle: "OK")
+                return
+            }
+            
+            delegate.didRequestFollowers(for: user.login)
+            dismissViewController()
+        }
+    }
 }

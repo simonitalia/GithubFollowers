@@ -21,6 +21,10 @@ class FollowerDetailItemFollowerViewController: FollowerDetailItemViewController
         itemViewOne.set(itemType: .followers, withCount: user.followers)
         itemViewTwo.set(itemType: .following, withCount: user.following)
         
-        callToActionButton.set(backgroundColor: .systemGreen, title: "Get Followers")
+        callToActionButton.set(backgroundColor: .systemGreen, title: "Get Followers", tag: 1)
+    }
+    
+    override func callToActionButtonTapped() {
+        delegate.didTapDetailItemButton(with: callToActionButton.tag, for: user)
     }
 }
