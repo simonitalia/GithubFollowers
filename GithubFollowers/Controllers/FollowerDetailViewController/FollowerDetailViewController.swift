@@ -22,7 +22,6 @@ class FollowerDetailViewController: UIViewController {
         configureViewController()
         configureUILayout()
         fireGetUser()
-        
     }
     
     
@@ -36,7 +35,7 @@ class FollowerDetailViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     let vc = FollowerDetailHeaderViewController(user: user)
-                    self.add(childViewController: vc, to: self.headerView)
+                    self.addChild(viewController: vc, to: self.headerView)
                 }
                 //                print(user)
                 
@@ -48,7 +47,7 @@ class FollowerDetailViewController: UIViewController {
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissViewController))
         navigationItem.rightBarButtonItem = doneButton
     }
     
@@ -88,15 +87,15 @@ class FollowerDetailViewController: UIViewController {
     }
     
     //function to add childrenVCs to this VC
-    func add(childViewController: UIViewController, to containerView: UIView) {
-        addChild(childViewController)
-        containerView.addSubview(childViewController.view)
-        childViewController.view.frame = containerView.bounds
-        childViewController.didMove(toParent: self)
+    func addChild(viewController: UIViewController, to containerView: UIView) {
+        addChild(viewController)
+        containerView.addSubview(viewController.view)
+        viewController.view.frame = containerView.bounds
+        viewController.didMove(toParent: self)
     }
     
     
-    @objc func dismissVC() {
+    @objc func dismissViewController() {
         dismiss(animated: true, completion: nil)
     }
     

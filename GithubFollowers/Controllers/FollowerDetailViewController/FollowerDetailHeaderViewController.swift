@@ -36,9 +36,16 @@ class FollowerDetailHeaderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubviews()
-        configureUIlayout()
+        addUIElements()
         configureUIElements()
+        configureUILayout()
+    }
+    
+    func addUIElements() {
+        itemViews = [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel]
+        for itemView in itemViews {
+            view.addSubview(itemView)
+        }
     }
     
     func configureUIElements() {
@@ -53,16 +60,7 @@ class FollowerDetailHeaderViewController: UIViewController {
         locationImageView.tintColor = .secondaryLabel
     }
     
-    
-    func addSubviews() {
-        itemViews = [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel]
-        for itemView in itemViews {
-            view.addSubview(itemView)
-        }
-    }
-    
-    
-    func configureUIlayout() {
+    func configureUILayout() {
         let padding: CGFloat = 20
         let textImagePadding: CGFloat = 12
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,8 +108,5 @@ class FollowerDetailHeaderViewController: UIViewController {
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bioLabel.heightAnchor.constraint(equalToConstant: 60)
        ])
-        
-        
     }
-
 }
