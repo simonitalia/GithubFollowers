@@ -8,10 +8,14 @@
 
 import UIKit
 
+enum NetworkCallParameter {
+    static var page = 1
+    static let numberOfItems = 100 //100 followers per call
+}
+
 class NetworkManager {
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com/"
-    let followersToFetch = 100 //100 followers per call
     
     private init() {
         
@@ -20,8 +24,7 @@ class NetworkManager {
     //completion Result type using Swift 5's new result type
     func getFollowers(for username: String, from page: Int, completion: @escaping (Result<[Follower], GFError>) -> Void) {
         let usernameUrl = "users/\(username)/followers"
-//        let followersToFetch = "100" //100 followers per call
-        let pageUrl = "?per_page=\(String(followersToFetch))&page=\(page)"
+        let pageUrl = "?per_page=\(String(NetworkCallParameter.numberOfItems))&page=\(page)"
         let fullUrl = baseURL+usernameUrl+pageUrl
 //        print("\(fullUrl)/n")
         

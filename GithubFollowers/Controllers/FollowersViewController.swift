@@ -20,8 +20,7 @@ class FollowersViewController: UIViewController {
     
     //UI elements contained within VC
     var username: String!
-    var totalFetchedFollowers = [Follower]()
-    var page = 1
+    var followers = [Follower]()
     var hasMoreFollowers = true
         //track if user has more followers left to fetch (after fetchuing in icrementts of 100
     
@@ -37,7 +36,7 @@ class FollowersViewController: UIViewController {
         configureViewController()
         createSearchController()
         createCollectionView()
-        fireGetFollowers(for: username, from: page)
+        fireGetFollowers(for: username, from: NetworkCallParameter.page)
         configureCollectionViewCell()
     }
     
@@ -82,17 +81,16 @@ class FollowersViewController: UIViewController {
             self.hideLoadingSpinner()
             
             switch result {
-            case .success(let deltaFetchedFollowers):
+            case .success(let deltaFollowers):
                 
                 //check if user has more followers to fetch and update flag if not
-                if deltaFetchedFollowers.count < NetworkManager.shared.followersToFetch {
+                if deltaFollowers.count < NetworkCallParameter.numberOfItems {
                     self.hasMoreFollowers = false
                 }
-                
-                self.totalFetchedFollowers.append(contentsOf: deltaFetchedFollowers)
+                self.followers.append(contentsOf: deltaFollowers)
                 
                 //check for zero followers
-                if self.totalFetchedFollowers.isEmpty {
+                if self.followers.isEmpty {
                     let text = "User has 0 followers! 🙁\nMake their day and go follow them."
                     DispatchQueue.main.async {
                         self.showEmptyStateView(withLabelText: text, in: self.view)
@@ -101,8 +99,8 @@ class FollowersViewController: UIViewController {
                     return
                 }
                 
-                self.updateCollectionViewSnapshotData(with: self.totalFetchedFollowers)
-                print("Followers returned count: \(deltaFetchedFollowers.count)\n")
+                self.updateCollectionViewSnapshotData(with: self.followers)
+                print("Followers returned count: \(deltaFollowers.count)\n")
                 //                print(followers)
                 
             case .failure(let error):
@@ -176,13 +174,15 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         
         //trigger get next 100 followers from page n
         if contentOffsetY > contentHeight - frameHeight {
-            page += 1 //increment page number
-            fireGetFollowers(for: username, from: page)
+//            page += 1 //increment page number
+            NetworkCallParameter.page += 1
+//            fireGetFollowers(for: username, from: page)
+            fireGetFollowers(for: username, from: NetworkCallParameter.page)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let activeArray = isSearching ? filteredFollowers : totalFetchedFollowers
+        let activeArray = isSearching ? filteredFollowers : followers
         let follower = activeArray[indexPath.item]
         
         let destinationVC = FollowerDetailViewController()
@@ -190,6 +190,7 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         destinationVC.delegate = self
         let nc = UINavigationController(rootViewController: destinationVC)
         present(nc, animated: true)
+        
     }
     
     
@@ -200,7 +201,7 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
         
         //fill array of filteredFollowers, matching searchText
         isSearching = true
-        filteredFollowers = totalFetchedFollowers.filter { $0.login.lowercased().contains(searchText.lowercased())
+        filteredFollowers = followers.filter { $0.login.lowercased().contains(searchText.lowercased())
         }
         
         updateCollectionViewSnapshotData(with: filteredFollowers)
@@ -209,7 +210,17 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
     //reset UICollectionView data to full data set on searchBar cancel
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
-        updateCollectionViewSnapshotData(with: totalFetchedFollowers)
+        updateCollectionViewSnapshotData(with: followers)
+    }
+}
+
+extension FollowersViewController {
+    func resetFollowersViewControllerPropertiesToDefaults() {
+        NetworkCallParameter.page = 1
+        followers.removeAll()
+        filteredFollowers.removeAll()
+        hasMoreFollowers = true
+        isSearching = false
     }
 }
 
@@ -219,10 +230,9 @@ extension FollowersViewController: FollowersViewControllerDelegate {
         //reset VC and trigger fetch of follwers for user
         self.username = username
         title = username
-        page = 1
-        totalFetchedFollowers.removeAll()
-        filteredFollowers.removeAll()
         collectionView.setContentOffset(.zero, animated: true) //scroll back to top
-        fireGetFollowers(for: username, from: page)
+        
+        resetFollowersViewControllerPropertiesToDefaults()
+        fireGetFollowers(for: username, from: NetworkCallParameter.page)
     }
 }

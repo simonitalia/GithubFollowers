@@ -144,6 +144,7 @@ extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
         
         //show github profile in safariVC
         if tag == 0 {
+            print("GitHub Profile Button tapped for user \(user.login)")
             guard let url = URL(string: user.htmlUrl) else {
                 presentGFAlertViewController(title: "Invalid Url!", message: "User's Profile could not be loaded.", buttonTitle: "OK")
                 return
@@ -154,13 +155,16 @@ extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
         
         //dismiss child DetailItem screem and load FollowersVC with followers of user tapped
         if tag == 1 {
+            print("Get Followers Button tapped for user \(user.login)")
             guard user.followers != 0 else {
                 presentGFAlertViewController(title: "No Followers!", message: "This user has no followers. 🙁", buttonTitle: "OK")
                 return
             }
             
             delegate.didRequestFollowers(for: user.login)
-            dismissViewController()
+//            dismissViewController()
+            dismiss(animated: true)
+            
         }
     }
 }

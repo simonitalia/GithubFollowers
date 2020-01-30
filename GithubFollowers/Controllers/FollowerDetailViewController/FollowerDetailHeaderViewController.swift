@@ -57,7 +57,7 @@ class FollowerDetailHeaderViewController: UIViewController {
         bioLabel.text = user.bio ?? "Bio information not provided"
         bioLabel.numberOfLines = 3
         
-        locationImageView.image = UIImage(systemName: SFSymbols.location)
+        locationImageView.image = UIImage(systemName: SFSymbol.location)
         locationImageView.tintColor = .secondaryLabel
     }
     

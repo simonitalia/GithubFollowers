@@ -72,20 +72,20 @@ class GFItemView: UIView {
         
         switch itemType {
         case .repos:
-            symbolImageView.image = UIImage(systemName: SFSymbols.repos)
+            symbolImageView.image = UIImage(systemName: SFSymbol.repos)
             titleLabel.text = "Public Repos"
             
             
         case .gists:
-            symbolImageView.image = UIImage(systemName: SFSymbols.gists)
+            symbolImageView.image = UIImage(systemName: SFSymbol.gists)
             titleLabel.text = "Public Gissts"
             
         case.followers:
-            symbolImageView.image = UIImage(systemName: SFSymbols.followers)
+            symbolImageView.image = UIImage(systemName: SFSymbol.followers)
             titleLabel.text = "Followers"
             
         case .following:
-            symbolImageView.image = UIImage(systemName: SFSymbols.following)
+            symbolImageView.image = UIImage(systemName: SFSymbol.following)
             titleLabel.text = "Following"
 
         }
