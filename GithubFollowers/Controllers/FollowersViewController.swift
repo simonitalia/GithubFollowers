@@ -231,8 +231,8 @@ extension FollowersViewController: FollowersViewControllerDelegate {
         self.username = username
         title = username
         collectionView.setContentOffset(.zero, animated: true) //scroll back to top
-        
         resetFollowersViewControllerPropertiesToDefaults()
+        
         fireGetFollowers(for: username, from: NetworkCallParameter.page)
     }
 }

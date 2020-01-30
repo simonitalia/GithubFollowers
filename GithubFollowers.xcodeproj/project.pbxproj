@@ -74,7 +74,7 @@
 		2AEA116F23DC21A2001A49C8 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
 		2AECC30A23DD9FEA0014908F /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CacheManager.swift; path = GithubFollowers/Managers/CacheManager.swift; sourceTree = SOURCE_ROOT; };
-		2AECC30C23DF0BC00014908F /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = SOURCE_ROOT; };
+		2AECC30C23DF0BC00014908F /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GFEmptyStateView.swift; path = GithubFollowers/Views/GFEmptyStateView.swift; sourceTree = SOURCE_ROOT; };
 		2AECC30E23DFBD800014908F /* FollowerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FollowerDetailViewController.swift; path = GithubFollowers/Controllers/FollowerDetailViewController/FollowerDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
