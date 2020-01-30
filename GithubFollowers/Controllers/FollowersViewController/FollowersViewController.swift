@@ -18,7 +18,7 @@ class FollowersViewController: UIViewController {
        case main
     }
     
-    //UI elements contained within VC
+    //VC Properties
     var username: String!
     var followers = [Follower]()
     var hasMoreFollowers = true
@@ -26,6 +26,7 @@ class FollowersViewController: UIViewController {
     
     var filteredFollowers = [Follower]() //for storing followers that match search text criteria
     var isSearching = false
+    
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -190,9 +191,9 @@ class FollowersViewController: UIViewController {
 }
 
 
-extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+//MARK: - UICollectionViewDelegate extension
+extension FollowersViewController: UICollectionViewDelegate {
     
-    //MARK: - UICollectionView delegate
     //configure content parameters using scrollViewDelegete (nb: UICollectionView is a sublclass of UIScrollView)
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
@@ -216,6 +217,10 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
             fireGetFollowers(for: username, from: NetworkCallParameter.page)
         }
     }
+}
+
+//MARK: - UISearchResultsUpdating, UISearchBarDelegate extension
+extension FollowersViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredFollowers : followers
@@ -230,7 +235,6 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
     }
     
     
-    //MARK: - UISearchResultsUpdaing delegate
     //filter UICollectionView data with entered searchBar text
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return }
@@ -250,6 +254,8 @@ extension FollowersViewController: UICollectionViewDelegate, UISearchResultsUpda
     }
 }
 
+
+//MARK: - FollowersViewController extension
 extension FollowersViewController {
     func resetFollowersViewControllerPropertiesToDefaults() {
         NetworkCallParameter.page = 1
@@ -260,6 +266,8 @@ extension FollowersViewController {
     }
 }
 
+
+//MARK: - FollowersViewControllerDelegate extension
 extension FollowersViewController: FollowersViewControllerDelegate {
     func didRequestFollowers(for username: String) {
         

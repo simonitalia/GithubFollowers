@@ -18,7 +18,7 @@ class FavoriteTableViewCell: UITableViewCell {
     let usernameLabel = GFTitleLabel(textAlignment: .center, fontSize: 26)
 
     
-    //MARK: UIColletionViewCell object initializers
+    //MARK: UITableViewCell object initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureAvatarImageView()
@@ -32,15 +32,18 @@ class FavoriteTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: FollowerCollectionViewCell customizations
+    
+    //MARK: FavoriteTableViewCell customizations
     private func configure() {
         accessoryType = .disclosureIndicator
     }
+    
     
     //method called when configuring the cell data in the UITableView in FavoritesVC
     func setUsernameLabel(text: String) {
         usernameLabel.text = text
     }
+    
     
     func setAvatarImageView(from urlString: String) {
         avatarImageView.fireGetImage(from: urlString)

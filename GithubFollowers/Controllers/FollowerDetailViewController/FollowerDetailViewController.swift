@@ -139,6 +139,7 @@ class FollowerDetailViewController: UIViewController {
 }
 
 
+//MARK: - FollowerDetailViewControllerDelegate extension
 extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
     func didTapDetailItemButton(with name: ButtonName, for user: User) {
         

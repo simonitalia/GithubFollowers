@@ -3,4 +3,70 @@
    uuid = "27226955-DEC2-4BBF-BA8F-1BB27D1389D1"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0E292CEA-ACB7-470A-B3D5-33ED710F4D51"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GithubFollowers/Managers/DataPersistenceManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "updateFavorites(with:action:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9DFA918A-FBA3-452E-9DCC-F0631B43AE25"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GithubFollowers/Controllers/FavoritesViewController/FavoritesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "tableView(_:commit:forRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9DFA918A-FBA3-452E-9DCC-F0631B43AE25 - 8fefd567c1b59ec8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GithubFollowers.FavoritesViewController.tableView(_: __C.UITableView, commit: __C.UITableViewCellEditingStyle, forRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "GithubFollowers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simonitalia/Documents/Programming/Swift%20_%20Xcode/Courses%20_%20Tutorials/Sean%20Allen/iOSDevJobInterviewPractice/GithubFollowers/GithubFollowers/Controllers/FavoritesViewController/FavoritesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "1044">
+               </Location>
+               <Location
+                  uuid = "9DFA918A-FBA3-452E-9DCC-F0631B43AE25 - a66a6d046279403e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;GithubFollowers.GFError&gt;) -&gt; () in GithubFollowers.FavoritesViewController.tableView(_: __C.UITableView, commit: __C.UITableViewCellEditingStyle, forRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "GithubFollowers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simonitalia/Documents/Programming/Swift%20_%20Xcode/Courses%20_%20Tutorials/Sean%20Allen/iOSDevJobInterviewPractice/GithubFollowers/GithubFollowers/Controllers/FavoritesViewController/FavoritesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

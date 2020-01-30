@@ -23,6 +23,7 @@ class FollowerDetailItemRepoViewController: FollowerDetailItemViewController {
         callToActionButton.set(backgroundColor: .systemPurple, title: "GitHub Profile")
     }
     
+    
     override func callToActionButtonTapped() {
         delegate.didTapDetailItemButton(with: .gitHubProfile, for: user)
     }

@@ -106,6 +106,8 @@ class SearchViewController: UIViewController {
     }
 }
 
+
+//MARK: - UITextFieldDelegate extension
 extension SearchViewController: UITextFieldDelegate {
     
     //submit data to and trigger display of target VC
