@@ -34,6 +34,7 @@
 		2AAADAA123E1547F00DE0D94 /* FollowerDetailItemFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAADAA023E1547F00DE0D94 /* FollowerDetailItemFollowerViewController.swift */; };
 		2AAADAA623E17E0000DE0D94 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAADAA523E17E0000DE0D94 /* String+Extension.swift */; };
 		2AAB9AA823E283DB00D0C2EA /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAB9AA723E283DB00D0C2EA /* DataPersistenceManager.swift */; };
+		2AD7034823E2D0F6004D2392 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD7034723E2D0F6004D2392 /* FavoriteTableViewCell.swift */; };
 		2AEA116E23DC2063001A49C8 /* FollowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA116D23DC2063001A49C8 /* FollowerCollectionViewCell.swift */; };
 		2AEA117023DC21A2001A49C8 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA116F23DC21A2001A49C8 /* GFAvatarImageView.swift */; };
 		2AEA117223DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */; };
@@ -72,6 +73,7 @@
 		2AAADAA023E1547F00DE0D94 /* FollowerDetailItemFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerDetailItemFollowerViewController.swift; sourceTree = "<group>"; };
 		2AAADAA523E17E0000DE0D94 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2AAB9AA723E283DB00D0C2EA /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
+		2AD7034723E2D0F6004D2392 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		2AEA116D23DC2063001A49C8 /* FollowerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCollectionViewCell.swift; sourceTree = "<group>"; };
 		2AEA116F23DC21A2001A49C8 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		2AEA117123DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
@@ -139,7 +141,7 @@
 				2A48B3CC23D8555400B00BD8 /* SearchViewController.swift */,
 				2AAB9AA923E28A2A00D0C2EA /* FollowersViewController */,
 				2AA98F7C23E038D8001086E6 /* FollowerDetailViewController */,
-				2A48B3BC23D8469600B00BD8 /* FavoritesViewController.swift */,
+				2AD7034623E2D0BA004D2392 /* FavoritesViewController */,
 				2A48B3D823D9A99E00B00BD8 /* GFAlertViewController.swift */,
 			);
 			path = Controllers;
@@ -234,6 +236,15 @@
 				2AEA116D23DC2063001A49C8 /* FollowerCollectionViewCell.swift */,
 			);
 			path = FollowersViewController;
+			sourceTree = "<group>";
+		};
+		2AD7034623E2D0BA004D2392 /* FavoritesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2A48B3BC23D8469600B00BD8 /* FavoritesViewController.swift */,
+				2AD7034723E2D0F6004D2392 /* FavoriteTableViewCell.swift */,
+			);
+			path = FavoritesViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +342,7 @@
 				2AECC30D23DF0BC00014908F /* GFEmptyStateView.swift in Sources */,
 				2A48B3F223DB115D00B00BD8 /* GFError.swift in Sources */,
 				2A48B3EE23DAF12E00B00BD8 /* NetworkManager.swift in Sources */,
+				2AD7034823E2D0F6004D2392 /* FavoriteTableViewCell.swift in Sources */,
 				2AECC30B23DD9FEA0014908F /* CacheManager.swift in Sources */,
 				2AEA117223DC4882001A49C8 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
 				2A48B3CD23D8555400B00BD8 /* SearchViewController.swift in Sources */,
