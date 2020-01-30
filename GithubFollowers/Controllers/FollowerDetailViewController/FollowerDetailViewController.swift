@@ -162,9 +162,7 @@ extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
             }
             
             delegate.didRequestFollowers(for: user.login)
-//            dismissViewController()
-            dismiss(animated: true)
-            
+            dismissViewController()
         }
     }
 }

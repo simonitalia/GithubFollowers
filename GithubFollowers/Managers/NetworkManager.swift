@@ -26,7 +26,7 @@ class NetworkManager {
         let usernameUrl = "users/\(username)/followers"
         let pageUrl = "?per_page=\(String(NetworkCallParameter.numberOfItems))&page=\(page)"
         let fullUrl = baseURL+usernameUrl+pageUrl
-//        print("\(fullUrl)/n")
+        print("\(fullUrl)") //for debugging
         
         guard let url = URL(string: fullUrl) else {
             completion(.failure(.invalidUsername))
@@ -37,8 +37,9 @@ class NetworkManager {
             
             //handle error cases
             //random network error
-            if let _ = error {
+            if let error = error {
                 completion(.failure(.unableToComplete))
+                print("Error fetching followers: \(error.localizedDescription)") //for debugging
                 return
             }
             
@@ -48,7 +49,7 @@ class NetworkManager {
                 return
             }
             
-            //bad data returned
+            //bad data returned, or alternate message like api rate limit exceeded
             guard let data = data else {
                 completion(.failure(.invalidData))
                 return
@@ -85,7 +86,7 @@ class NetworkManager {
 
             //check for error, and if so print error and exit method
             if let error = error {
-                print("Error fetching image: \(error.localizedDescription)")
+                print("Error fetching image: \(error.localizedDescription)") //for debugging
                 return
             }
 
@@ -108,10 +109,9 @@ class NetworkManager {
     }
     
     func getUser(for username: String, completion: @escaping (Result<User, GFError>) -> Void) {
-            
             let endpoint = "users/"
             let fullUrl = baseURL+endpoint+username
-    //        print("\(fullUrl)/n")
+    //        print("\(fullUrl)") //for debugging
             
             guard let url = URL(string: fullUrl) else {
                 completion(.failure(.invalidUsername))

@@ -49,6 +49,9 @@ class FollowersViewController: UIViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     
@@ -151,6 +154,12 @@ class FollowersViewController: UIViewController {
             self.dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
         }
     }
+    
+    @objc func addButtonTapped() {
+        print("Add Button Tapped")
+    }
+    
+    
 }
 
 
