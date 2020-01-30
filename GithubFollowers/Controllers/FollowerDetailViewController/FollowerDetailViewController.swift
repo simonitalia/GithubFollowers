@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FollowerDetailViewControllerDelegate: class {
-    func didTapDetailItemButton(with tag: Int, for user: User)
+    func didTapDetailItemButton(with name: ButtonName, for user: User)
 }
 
 class FollowerDetailViewController: UIViewController {
@@ -140,10 +140,10 @@ class FollowerDetailViewController: UIViewController {
 
 
 extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
-    func didTapDetailItemButton(with tag: Int, for user: User) {
+    func didTapDetailItemButton(with name: ButtonName, for user: User) {
         
         //show github profile in safariVC
-        if tag == 0 {
+        if name == .gitHubProfile {
             print("GitHub Profile Button tapped for user \(user.login)")
             guard let url = URL(string: user.htmlUrl) else {
                 presentGFAlertViewController(title: "Invalid Url!", message: "User's Profile could not be loaded.", buttonTitle: "OK")
@@ -154,7 +154,7 @@ extension FollowerDetailViewController: FollowerDetailViewControllerDelegate {
         }
         
         //dismiss child DetailItem screem and load FollowersVC with followers of user tapped
-        if tag == 1 {
+        if name == .getFollowers {
             print("Get Followers Button tapped for user \(user.login)")
             guard user.followers != 0 else {
                 presentGFAlertViewController(title: "No Followers!", message: "This user has no followers. 🙁", buttonTitle: "OK")

@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum ButtonName {
+    case gitHubProfile
+    case getFollowers
+}
+
 class GFButton: UIButton {
     
     // MARK: - UIButton object initializers
@@ -42,7 +47,7 @@ class GFButton: UIButton {
     }
     
     
-    func set(backgroundColor: UIColor, title: String, tag: Int) {
+    func set(backgroundColor: UIColor, title: String) {
         self.backgroundColor = backgroundColor
         setTitle(title, for: .normal)
         self.tag = tag

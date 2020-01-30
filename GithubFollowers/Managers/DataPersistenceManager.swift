@@ -23,7 +23,7 @@ struct DataPersistenceManager {
     static private let defaults = UserDefaults.standard
     
     
-    static func updateFavoritesWith(favorite: Follower, action: PersistenceAction, completion: @escaping (GFError?) -> Void) { getSavedFavorites { result in
+    static func updateFavorites(with favorite: Follower, action: PersistenceAction, completion: @escaping (GFError?) -> Void) { getSavedFavorites { (result) in
                 
             switch result {
             case .success(let favorites):
